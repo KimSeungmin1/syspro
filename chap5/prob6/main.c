@@ -22,7 +22,8 @@ int main(int argc, char *argv[])
 		printf("\Enter StudentlD to search:");
 		if (scanf("%d", &id) == 1) {
 			lseek(fd, (id-START_ID)*sizeof(record), SEEK_SET);
-			if ((read(fd, (char *) &record, sizeof(record)) > 0) && (record.id, record.score));
+			if ((read(fd, (char *) &record, sizeof(record)) > 0) && (record.id != 0))
+				printf("Name:%s\t StuID:%d\t Score:%d\n", record.name, record.id, record.score);
 					else printf("Record %d Null\n", id);
 					} else printf("Input Error");
 					printf("Continue?(Y/N)");
