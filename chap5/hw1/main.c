@@ -45,11 +45,7 @@ int main() {
         }
     } 
 	else {
-        int num = 0;		
-        
-        for (int i = 0; input[i] != '\0'; i++) {
-			num = num * 10 + (input[i] - '0');
-		}
+        int num = atoi(input);		
             printf("%s\n", savedText[num - 1]);
     }
     return 0;
