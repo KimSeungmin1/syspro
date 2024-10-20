@@ -17,12 +17,6 @@ int main() {
     scanf("%s", words[a]);
     a++;
 }
-	printf("Before sorting...\n");
-	for (int i = 0; i < LEN; i++) {
-		printf("%s\n", words[i]);
-	}
-	printf("\n");
-
 	qsort(words, LEN, MAX_STR_LEN, compare);
 
 	for (int i = 0; i < LEN; i++) {
