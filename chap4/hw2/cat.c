@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
     }
 
     while (fgets(buffer, MAXLINE, fp1) != NULL) {
-        if (line_numbers) {
+        if (line_numbers == 1) {
             line++;
             printf("%3d %s", line, buffer);
         } else {
@@ -44,7 +44,7 @@ int main(int argc, char *argv[]) {
 
     if (fp2 != NULL) {
         while (fgets(buffer, MAXLINE, fp2) != NULL) {
-            if (line_numbers) {
+            if (line_numbers == 1) {
                 line++;
                 printf("%3d %s", line, buffer);
             } else {
@@ -56,7 +56,7 @@ int main(int argc, char *argv[]) {
 
     if (fp3 != NULL) {
         while (fgets(buffer, MAXLINE, fp3) != NULL) {
-            if (line_numbers) {
+            if (line_numbers == 1) {
                 line++;
                 printf("%3d %s", line, buffer);
             } else {
