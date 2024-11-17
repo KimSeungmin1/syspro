@@ -1,0 +1,6 @@
+sleep 100 &
+sleep 100 &
+jobs
+ps -f
+kill %1
+ps -f

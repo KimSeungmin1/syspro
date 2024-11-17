@@ -1,0 +1,5 @@
+(echo START1; sleep 10; echo DONE1)&
+(echo START2; sleep 10; echo DONE2)&
+kill -KILL (PID)
+kill -STOP ()
+kill -CONT ()
