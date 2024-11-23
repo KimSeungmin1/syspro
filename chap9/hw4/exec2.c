@@ -6,62 +6,64 @@
 
 #define MAXARG 100
 
-int main() 
-{
-    
-char line[1024];
-char *args[MAXARG];
-char *token;
-int background;
+int main() {
+    char line[1024];
+    char *args[MAXARG];
+    char *token, *saveptr;
+    int background;
 
-    while(1) {
+    while (1) {
         printf("Pls input cmd : ");
 
-    if (fgets(line, sizeof(line), stdin) == NULL) {
-            perror("Failed");
-            exit(1);
+        if (fgets(line, sizeof(line), stdin) == NULL) {
+            continue;
         }
 
-line[strcspn(line, "\n")] = 0;
+        line[strcspn(line, "\n")] = 0;
 
-    if (line[0] == '\0') {
-        continue;
-    }
+        if (strcmp(line, "exit") == 0) {
+            printf("Exit\n");
+            break;
+        }
 
-background = 0;
-    if (line[strlen(line) - 1] == '&') {
-        background = 1;
-        line[strlen(line) - 1] = '\0'; 
-    }
+        if (line[0] == '\0') {
+            continue;
+        }
 
-token = strtok(line, " ");
-int i = 0;
+        background = 0;
+        if (line[strlen(line) - 1] == '&') {
+            background = 1;
+            line[strlen(line) - 1] = '\0';
+        }
 
-    while(token != NULL) {
+        token = strtok_r(line, " ", &saveptr);
+        int i = 0;
+        while (token != NULL) {
             args[i++] = token;
-            token = strtok(NULL, " ");
-    }
-    
-args[i] = NULL;
-pid_t pid = fork();
-        
-        if (pid == -1) {
-            perror("fork fail");
-            exit(1);
+            token = strtok_r(NULL, " ", &saveptr);
         }
-        
-        if (pid == 0) { // child
-            if (execvp(args[0], args) == -1) {
-                perror("Execute Failed¨");
-                exit(1);
-            }
-        } 
-        else { // Parent
+        args[i] = NULL;
+
+        printf("Parent process start\n");
+
+        pid_t pid = fork();
+        if (pid == -1) {
+            printf("Parent process end\n");
+            continue;
+        }
+
+        if (pid == 0) {
+            printf("child process start\n");
+            execvp(args[0], args);
+            exit(1);
+        } else {
             if (!background) {
                 wait(NULL);
             }
+            printf("Parent process end\n");
         }
     }
+
     return 0;
 }
 
